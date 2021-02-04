@@ -1,0 +1,178 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+     <link rel="shortcut icon" href="//hhassan1230.github.io/PhotoChill/miniTitleCard.jpg" type="image/x-icon">
+     <link rel="icon" href="//hhassan1230.github.io/PhotoChill/miniTitleCard.jpg" type="image/x-icon">
+     <meta name="description" content="Welcome to Christmas in Ovenland! We hope you have fun exploring this small part of Ovenland by the amazing Micheline Hess. There's lots of neat stuff to find in this VR adventure. NOTE - Downloadable coloring pages will open in a new tab to get back to Ovenland; close it, and carry on! Happy Holidays from Micheline Hess & Made in Brooklyn Games!">
+     <meta name="keywords" content="games, vr, web, web tour, virtual, reality, cool, game, indie, Micheline Hess, Micheline, hessvacio, hess, comic, oculus, amazing, mobile, projects, javascript, unity3d, coding, vr tour, Ovenland, Christmas in Ovenland, Malice in Ovenland, Malice, michmasharts, mich mash arts">
+     <meta property="og:title" content="Christmas in Ovenland">
+     <meta property="og:type" content="website">
+     <meta property="og:image" content="//hhassan1230.github.io/PhotoChill/miniTitleCard.jpg">
+     <meta property="og:url" content="//www.michmasharts.com/malice-in-ovenland">
+     <meta property="og:description" content="Welcome to Christmas in Ovenland! We hope you have fun exploring this small part of Ovenland by the amazing Micheline Hess. There's lots of neat stuff to find in this VR adventure. NOTE - Downloadable coloring pages will open in a new tab to get back to Ovenland; close it, and carry on! Happy Holidays from Micheline Hess & Made in Brooklyn Games!">
+     <meta property="og:site_name" content="Christmas in Ovenland">
+    <title>Christmas in Ovenland</title>
+    <link rel="stylesheet" href="./styles/output-new.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+  </head>
+
+  <body>
+    <!-- Attachment point for your app -->
+    <div id="initialize">
+      <div id="placeHolder">
+        <div class="nav-container">
+          <div>
+            <p id="logo">Christmas in Ovenland<span id="highlight">.</span></p>
+          </div>
+          <div>
+            <!-- <a href="#" class="toggle-nav">Menu <i class="ion-navicon-round"></i></a> -->
+            <ul class="nav-items">
+              <li class="nav-item"><a href="//www.michmasharts.com/">About Artist</a></li>
+              <li class="nav-item"><a href="#" onClick="enterApp();">MiBKG</a></li>
+              <li class="nav-item"><a href="#" onClick="enterApp();">Start Your Trip</a></li>
+            </ul>
+          </div>
+        </div>
+        <main class="intro-section">
+          <div class="img-container">
+            <!-- <img src="//hhassan1230.github.io/PhotoChill/TITLECARD_BG_PaddingV3.jpg"> -->
+          </div>
+        </main>
+      </div>
+    </div>
+    <!-- <script src="./client.bundle.js"></script> -->
+    <script src="./client.bundle.js"></script>
+
+    <script>
+      let images = [
+        {
+          title: `<h1 class="title"><span class="underline">Explore Christmas in Ovenland</span></h1>`,
+          source: 'https://hhassan1230.github.io/PhotoChill/TITLECARD_BG_PaddingV3.jpg',
+          description: '<p class="description">Welcome! I hope you have fun exploring this small part of <a href="#" class="highlight-text" onClick="enterApp();">Ovenland.</a></p>',
+          index: 0
+        },
+        {
+          title: `<h1 class="title"><span class="underline">How to Play</span></h1>`,
+          source: 'https://hhassan1230.github.io/PhotoChill/howtoplayPaddingV6.png',
+          description: '',
+          index: 1
+        },
+        {
+          title: `<h1 class="title"><span class="underline">Download &amp; Color Exclusive Printables</span></h1>`,
+          source: 'https://hhassan1230.github.io/PhotoChill/TITLECARD_BG_Printables_V4.jpg',
+          description: '',
+          index: 2
+        },
+        {
+          title: ``,
+          source: 'https://hhassan1230.github.io/PhotoChill/From-xmas_1_V2.jpg',
+          description: '<p class="description">Enjoy the world of Ovenland by <a class="highlight-text" href="//www.michmasharts.com/">Micheline Hess</a></p>',
+          index: 3
+        }
+      ]
+
+      //initialize with first image properties
+      var p = document.createElement("p");
+      var h1 = document.createElement("h1");
+      var img = document.createElement("img");
+      var slider = document.createElement("div")
+      p.innerHTML= images[0].description;
+      h1.innerHTML= images[0].title;
+      var div = document.getElementsByClassName("img-container")[0];
+      div.appendChild(h1);
+      img.src = images[0].source;
+      img.setAttribute('onClick', 'enterApp()');
+      div.appendChild(img)
+      div.appendChild(p);
+      slider.innerHTML = `<div class="slider">
+            <div class="controls">
+              <button class="previous">
+                <span class="iconify" data-icon="ion-ios-arrow-thin-left" data-inline="false"></span>
+              </button>
+              <button class="next">
+                <span class="iconify" data-icon="ion-ios-arrow-thin-right" data-inline="false"></span>
+              </button>
+            </div>
+          </div>`
+      div.appendChild(slider)
+
+      const nextItem = document.querySelector('.next');
+      const previousItem = document.querySelector('.previous');
+      nextItem.addEventListener('click', showNextItem);
+      previousItem.addEventListener('click', showPreviousItem);
+      // img.addEventListener('click', enterApp);
+
+
+      //show previous item
+      function showPreviousItem() {
+        let title = document.querySelector(".title")
+        let img = document.querySelector("img");
+        let description = document.querySelector(".description")
+        let item = images.filter(image => image.source === img.src)[0]
+        if(item.index - 1 < 0) {
+          title.innerHTML = images[images.length - 1].title
+          img.src = images[images.length - 1].source
+          description.innerHTML = images[images.length - 1].description;
+        } else {
+          title.innerHTML = images[item.index - 1].title
+          img.src = images[item.index - 1].source
+          description.innerHTML = images[item.index - 1].description
+        }
+
+        let newNode = img.cloneNode(true);
+        img.parentNode.replaceChild(newNode, img);
+        newNode.classList.remove('img-next');
+        newNode.classList.add('img-previus');
+        document.querySelector("button").classList.remove('active');
+      }
+
+      //show next item
+      function showNextItem() {
+        let title = document.querySelector(".title")
+        let img = document.querySelector("img");
+        let description = document.querySelector(".description")
+        let item = images.filter(image => image.source === img.src)[0]
+        if(item.index + 1 > images.length - 1) {
+          title.innerHTML = images[0].title
+          img.src = images[0].source
+          description.innerHTML = images[0].description
+        } else {
+          title.innerHTML = images[item.index + 1].title
+          img.src = images[item.index + 1].source
+          description.innerHTML = images[item.index + 1].description
+        }
+
+        let newNode = img.cloneNode(true);
+        img.parentNode.replaceChild(newNode, img);
+        newNode.classList.remove('img-previus');
+        newNode.classList.add('img-next');      
+      }
+
+
+    // Initialize the React 360 application
+    function enterApp() {
+      console.log("callingg")
+      const elem = document.getElementById('initialize');
+        while(elem.firstChild){
+          elem.firstChild.remove()
+        }
+        // console.log("My element", elem)
+
+        React360.init(
+            'index.bundle.js',
+            document.getElementById('initialize'), {
+                assetRoot: 'static_assets/',
+            }
+        );
+        // document.querySelectorAll("*").forEach(el => {
+        //   el.style.margin = "0px";
+        //   el.style.boxSizing = "inherit"
+        // });
+    }
+    // DEBUGGING
+    // enterApp();
+    </script>
+  </body>
+</html>
+
